@@ -89,8 +89,17 @@ span{
     padding: 10px;
     justify-self: center;
     border-radius: 5px;
-
     background-color:rgb(233, 231, 128);
+}
+
+.bookStyle2{
+    border: 2px solid black;
+    width: 600px;
+    margin: 5px;
+    padding: 10px;
+    justify-self: center;
+    border-radius: 5px;
+    background-color:rgb(194, 194, 192);
 }
 
 .delBtn{

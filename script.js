@@ -4,8 +4,6 @@ const authorInput = document.querySelector('#authorInput')
 const pagesInput = document.querySelector('#pagesInput')
 const submitBook = document.querySelector('#submit')
 
-// const booksInLibrary = document.querySelectorAll('.bookStyle')
-
 const books = document.querySelector('.books')
 
 let myLibrary = [];
@@ -29,8 +27,11 @@ function addBookToLibrary (){
     let title = titleInput.value
     let author = authorInput.value
     let pages = pagesInput.value
-    
-    let finished = checked()
+    if (titleInput.value == '') title = 'unknown'
+    if (authorInput.value == '') author = 'unknown'
+    if (pagesInput.value == '') pages = 'unknown'
+
+    let finished = checked() //marked as finished or not
 
     let newBook = new Book(title, author, pages, finished)
     myLibrary.push(newBook)
@@ -48,14 +49,22 @@ function print(){
         let cover = document.createElement('div')
         cover.textContent =`title: ${book.title} 
                             author: ${book.author}
-                            pages: ${book.pages}
-                            ${book.finished}` 
+                            pages: ${book.pages}` 
+        
         cover.classList.add('bookStyle')
+
+        if (book.finished){
+            cover.classList.add('bookStyle2')
+        }
+        else{
+            cover.classList.add('bookStyle')
+        }
 
         books.appendChild(cover)
     }
 
-    const addedBooks = document.querySelectorAll('.bookStyle')
+    const addedBooks = document.querySelectorAll('.bookStyle, .bookStyle2')
+
     addedBooks.forEach(book => {
         book.addEventListener('click', removeBook)
 
@@ -64,7 +73,7 @@ function print(){
         del.textContent = 'x'
         book.appendChild(del)
     }) 
-    //ilyen forEach létezik... 
+    //ilyen forEach létezik lol... 
     addedBooks.forEach((book, i) => book.setAttribute('data-index', i))
 }
 
@@ -82,9 +91,29 @@ function clearBooks(){
     books.textContent = '';
 }
 
-
 function clearFields(){
     titleInput.value = ''
     authorInput.value =''
     pagesInput.value = ''
 }
+
+function toggle(){
+}
+
+// megcsinálni h kirakja  checkboxot minden bookra
+// if false -> átállítja a finished-et falsera, vice versa
+        //hasonlóna event target és data-index, kikeresi myLibrary[i].object.finished = 'false'
+ let array = [
+     object0 = {
+         finished: 'false'
+     },
+     object1 = {
+        finished: 'true'
+    },
+    object2 = {
+        read: 'false'
+    }
+ ]
+ array[1].finished //= true
+
+ //new Books instanceof Book() 
