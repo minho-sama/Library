@@ -1,7 +1,7 @@
 body{
     font-family:'Courier New', Courier, monospace;
-    background-color:white;
     margin:0;
+    background-color: rgb(255, 255, 255);
 }
 
 .new-book{
@@ -19,14 +19,17 @@ body{
     border: 2px solid black;
 }
 
+/* label[for="isFinished"]{
+} */
 #isFinished{
-    color:red;
+    margin-left: 11px;
 }
 
 #submit{
     grid-column: 2;
     grid-row: 1/4;
     border: 2px solid black;
+    font-family : inherit;
 }
 
 #submit:hover{
@@ -52,4 +55,54 @@ footer{
 span{
     margin:auto;
     padding:5px;
+}
+
+.books{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(8, 1fr);
+    grid-gap: 10px;
+    /* border: 5px solid red; */
+    margin: 5px;
+
+}
+
+.book{
+    border: 2px solid black;
+    width: 600px;
+    margin: 5px;
+    padding: 10px;
+    justify-self: center;
+    border-radius: 5px;
+
+    background-color:rgb(233, 231, 128);
+}
+
+.book:hover{
+    background-color:rgb(241, 239, 80)
+}
+
+.bookStyle{
+    border: 2px solid black;
+    width: 600px;
+    margin: 5px;
+    padding: 10px;
+    justify-self: center;
+    border-radius: 5px;
+
+    background-color:rgb(233, 231, 128);
+}
+
+.delBtn{
+    color:black;
+    float: right;
+    background-color:white;
+    border: 1px solid black;
+}
+
+.delBtn:hover{
+    color:white;
+    float: right;
+    background-color:black;
+    border: 1px solid white;
 }
