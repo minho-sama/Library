@@ -1,24 +1,10 @@
-
-
-const harryP = new Book('harry potter', 'jk rowling', 540, false)
-const lotr = new Book('lord of the rings', 'tolkien', 1200, true)
-
-//add prototype
-Book.prototype.material = 'paper'
-Book.prototype.info = function(){
-    return (this.finished) ? 
-        `${this.title} by ${this.author}, ${this.pages} pages, already read ` 
-        :`${this.title} by ${this.author}, ${this.pages} pages, not read yet` 
-}
-
-// Fent csak sandbox
-//miután kész mindent lerövidíteni amit csak lehet (pl forEach, stb) 
-
 const inputs = document.querySelectorAll('.input')
 const titleInput = document.querySelector('#titleInput')
 const authorInput = document.querySelector('#authorInput')
 const pagesInput = document.querySelector('#pagesInput')
 const submitBook = document.querySelector('#submit')
+
+// const booksInLibrary = document.querySelectorAll('.bookStyle')
 
 const books = document.querySelector('.books')
 
@@ -58,16 +44,6 @@ submitBook.addEventListener('click', addBookToLibrary)
 
 
 function print(){
-    // let lastBook = myLibrary[myLibrary.length - 1]
-    //     book = document.createElement('div')
-    //     book.textContent = `title: ${lastBook.title} 
-    //                         author: ${lastBook.author}
-    //                         pages: ${lastBook.pages}
-    //                         ${lastBook.finished}` 
-    //     book.classList.add('bookStyle')
-    //     books.appendChild(book)
-    // így nem kéne clearelni mindent submit book előtt, de a delete-nél üres helyek maradnának
-
     for (const book of myLibrary){
         let cover = document.createElement('div')
         cover.textContent =`title: ${book.title} 
@@ -75,16 +51,31 @@ function print(){
                             pages: ${book.pages}
                             ${book.finished}` 
         cover.classList.add('bookStyle')
+
         books.appendChild(cover)
     }
+
     const addedBooks = document.querySelectorAll('.bookStyle')
     addedBooks.forEach(book => {
+        book.addEventListener('click', removeBook)
+
         let del = document.createElement('BUTTON');
         del.classList.add('delBtn')
         del.textContent = 'x'
         book.appendChild(del)
     }) 
-    //delete gomb event targetttel?
+    //ilyen forEach létezik... 
+    addedBooks.forEach((book, i) => book.setAttribute('data-index', i))
+}
+
+function removeBook(event){
+    if (event.target.classList.contains('delBtn')){
+        let book = event.target.parentElement
+        books.removeChild(book)
+    }
+    //delete child from array, according to data-attribute
+    let indexInArray = event.target.dataset.index
+    myLibrary.splice( indexInArray, 1)
 }
 
 function clearBooks(){
@@ -97,20 +88,3 @@ function clearFields(){
     authorInput.value =''
     pagesInput.value = ''
 }
-
-/*array:
-myLibrary = [
-    Book:{
-        author:
-        title:
-        pages:
-        finished: true
-    },
-        Book:{
-        author:
-        title:
-        pages:
-        finished: false
-    },
-]
-*/
