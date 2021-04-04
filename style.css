@@ -115,3 +115,36 @@ span{
     background-color:black;
     border: 1px solid white;
 }
+
+.status{
+    float:right;
+    margin-right: 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+
+.status:hover{
+    color:white;
+    float: right;
+    background-color:black;
+    border: 1px solid white;
+}
+
+.bookStyleRead{
+    border: 2px solid black;
+    width: 600px;
+    margin: 5px;
+    padding: 10px;
+    justify-self: center;
+    border-radius: 5px;
+    background-color:rgb(194, 194, 192);
+}
+.bookStyleNotRead{
+    border: 2px solid black;
+    width: 600px;
+    margin: 5px;
+    padding: 10px;
+    justify-self: center;
+    border-radius: 5px;
+    background-color:rgb(233, 231, 128);
+}

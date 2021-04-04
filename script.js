@@ -51,7 +51,7 @@ function print(){
                             author: ${book.author}
                             pages: ${book.pages}` 
         
-        cover.classList.add('bookStyle')
+        // cover.classList.add('bookStyle')
 
         if (book.finished){
             cover.classList.add('bookStyle2')
@@ -75,6 +75,8 @@ function print(){
     }) 
     //ilyen forEach létezik lol... 
     addedBooks.forEach((book, i) => book.setAttribute('data-index', i))
+
+    createStatus()
 }
 
 function removeBook(event){
@@ -82,7 +84,7 @@ function removeBook(event){
         let book = event.target.parentElement
         books.removeChild(book)
     }
-    //delete child from array, according to data-attribute
+    //delete child from ARRAY, according to data-attribute
     let indexInArray = event.target.dataset.index
     myLibrary.splice( indexInArray, 1)
 }
@@ -97,23 +99,45 @@ function clearFields(){
     pagesInput.value = ''
 }
 
-function toggle(){
+function createStatus(){
+    const addedBooks = document.querySelectorAll('.bookStyle, .bookStyle2')
+    addedBooks.forEach(book =>{
+        let status = document.createElement('button')
+        status.classList.add('status')
+        status.textContent = 'mark as read'
+        book.appendChild(status)
+    })
+
+    const statusBtns = document.querySelectorAll('.status')
+    statusBtns.forEach(btn => {
+        btn.addEventListener('click', changeColor)
+    })
 }
 
-// megcsinálni h kirakja  checkboxot minden bookra
-// if false -> átállítja a finished-et falsera, vice versa
-        //hasonlóna event target és data-index, kikeresi myLibrary[i].object.finished = 'false'
- let array = [
-     object0 = {
-         finished: 'false'
-     },
-     object1 = {
-        finished: 'true'
-    },
-    object2 = {
-        read: 'false'
-    }
- ]
- array[1].finished //= true
+function changeColor(event){
+    let book = event.target.parentElement
 
- //new Books instanceof Book() 
+    if (event.target.classList.contains('status') 
+        && event.target.textContent == 'mark as read'){
+        book.classList.remove('bookStyleNotRead')
+        book.classList.add('bookStyleRead')
+        event.target.textContent = 'mark as unread'
+
+        //change finished property in object
+        let index = book.dataset.index
+        myLibrary[index].finished = 'true'
+    }
+    else if(event.target.classList.contains('status') 
+        && event.target.textContent == 'mark as unread'){
+
+        book.classList.remove('bookStyleRead')
+        book.classList.add('bookStyleNotRead')
+        event.target.textContent = 'mark as read'
+
+        //change prop in obj
+        let index = book.dataset.index
+        myLibrary[index].finished = 'false'
+    }
+
+}
+// event.target.textContent == 'mark as read'
